@@ -12,7 +12,7 @@ const jsPlugins = selectJsPlugins(["tsdoc", "react-doctor"]);
 export default defineConfig({
   env: core.env,
   extends: [core, react, next, nextJsPlugins, shadcn, antiSlop, jsPlugins],
-  ignorePatterns: core.ignorePatterns,
+  ignorePatterns: [...core.ignorePatterns, "**/components/ui"],
   jsPlugins: [...jsPlugins.jsPlugins, ...shadcn.jsPlugins],
   options: { typeAware: true },
   settings: jsPluginSettings,
