@@ -12,7 +12,13 @@ const jsPlugins = selectJsPlugins(["tsdoc", "react-doctor"]);
 export default defineConfig({
   env: core.env,
   extends: [core, react, next, nextJsPlugins, shadcn, antiSlop, jsPlugins],
-  ignorePatterns: [...core.ignorePatterns, "**/components/ui"],
+  // shadcn writes these files; keep the CLI's output untouched.
+  ignorePatterns: [
+    ...(core.ignorePatterns ?? []),
+    "**/components/ui",
+    "src/lib/highlighter.tsx",
+    "src/hooks/use-highlighted-code.ts",
+  ],
   jsPlugins: [...jsPlugins.jsPlugins, ...shadcn.jsPlugins],
   options: { typeAware: true },
   settings: jsPluginSettings,
